@@ -1,0 +1,364 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu00bissmigdj"]
+
+[ext_resource type="Script" uid="uid://2oncuq50m0g7" path="res://Scripts/game.gd" id="1_21xkr"]
+[ext_resource type="Texture2D" uid="uid://c7h0j15b7fnoa" path="res://icon.svg" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://bdw5ldwerakdm" path="res://Scripts/entity.gd" id="3_jjvhh"]
+[ext_resource type="Theme" uid="uid://d2nmyjt1qp31d" path="res://Themes/font_size.tres" id="4_jjvhh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+bg_color = Color(0.883595, 0.175353, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
+bg_color = Color(1.02037e-05, 0.653316, 0.877834, 1)
+
+[node name="Main" type="Node2D"]
+
+[node name="Main Container" type="PanelContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Container"]
+layout_mode = 2
+
+[node name="UI" type="VBoxContainer" parent="Main Container/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Opponent Info" type="HBoxContainer" parent="Main Container/MarginContainer/UI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Panel" type="Panel" parent="Main Container/MarginContainer/UI/Opponent Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dm0k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Container/MarginContainer/UI/Opponent Info/Panel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 90.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Container/MarginContainer/UI/Opponent Info/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Name" type="Label" parent="Main Container/MarginContainer/UI/Opponent Info/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLarge"
+text = "Name of opponent"
+
+[node name="Charges" type="Label" parent="Main Container/MarginContainer/UI/Opponent Info/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Charges: 0"
+
+[node name="Health" type="Label" parent="Main Container/MarginContainer/UI/Opponent Info/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 13.08
+theme_type_variation = &"HeaderLarge"
+text = "Health: ❣️❣️❣️❣️❣️"
+
+[node name="Main Game Screen" type="Panel" parent="Main Container/MarginContainer/UI"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+script = ExtResource("1_21xkr")
+
+[node name="Walls" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen"]
+
+[node name="Polygon2D" type="Polygon2D" parent="Main Container/MarginContainer/UI/Main Game Screen/Walls"]
+position = Vector2(8.36469, 1000.78)
+color = Color(0.568973, 0.568973, 0.568973, 1)
+antialiased = true
+polygon = PackedVector2Array(424, -910, 424, -270, -8, -100, -8, -1000)
+uv = PackedVector2Array(417.635, -908.783, 418.635, -346.783, -8.36469, -8.78345, -8.36469, -910.783)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Main Container/MarginContainer/UI/Main Game Screen/Walls"]
+position = Vector2(447, 999)
+color = Color(0.568973, 0.568973, 0.568973, 1)
+antialiased = true
+polygon = PackedVector2Array(1473, -910, 1473, -270, -8, -270, -8, -910)
+uv = PackedVector2Array(417.635, -908.783, 418.635, -346.783, -8.36469, -8.78345, -8.36469, -910.783)
+
+[node name="Sprites" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen"]
+
+[node name="Player" type="Sprite2D" parent="Main Container/MarginContainer/UI/Main Game Screen/Sprites"]
+position = Vector2(126, 772)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jjgbg")
+script = ExtResource("3_jjvhh")
+
+[node name="Opponent" type="Sprite2D" parent="Main Container/MarginContainer/UI/Main Game Screen/Sprites"]
+position = Vector2(1790, 129)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jjgbg")
+script = ExtResource("3_jjvhh")
+
+[node name="Metronome" type="Sprite2D" parent="Main Container/MarginContainer/UI/Main Game Screen/Sprites"]
+position = Vector2(1856, 837)
+texture = ExtResource("1_jjgbg")
+
+[node name="Timers" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen"]
+
+[node name="InputTime" type="Timer" parent="Main Container/MarginContainer/UI/Main Game Screen/Timers"]
+wait_time = 4.0
+one_shot = true
+ignore_time_scale = true
+
+[node name="WaitTime" type="Timer" parent="Main Container/MarginContainer/UI/Main Game Screen/Timers"]
+wait_time = 2.0
+one_shot = true
+ignore_time_scale = true
+
+[node name="UI" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen"]
+
+[node name="Start" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+custom_minimum_size = Vector2(200, 90)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 916.0
+offset_top = 377.0
+offset_right = 1116.0
+offset_bottom = 475.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="Pause" type="CheckButton" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+visible = false
+offset_right = 121.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 25
+text = "Pause"
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="WaitLabel" type="Label" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 731.5
+offset_top = 405.333
+offset_right = 1188.5
+offset_bottom = 494.667
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "CHOP AND ......"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1756.0
+offset_top = 730.0
+offset_right = 1796.0
+offset_bottom = 774.667
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+
+[node name="Player Move" type="Label" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+custom_minimum_size = Vector2(460, 69.792)
+offset_left = 6.0
+offset_top = 485.0
+offset_right = 46.0
+offset_bottom = 554.792
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 50
+
+[node name="Opponent Move" type="Label" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+custom_minimum_size = Vector2(460, 69.792)
+offset_left = 1438.0
+offset_top = 270.0
+offset_right = 1898.0
+offset_bottom = 339.792
+theme_override_font_sizes/font_size = 50
+
+[node name="Moves" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen/UI"]
+visible = false
+
+[node name="Charge" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves"]
+offset_left = 901.0
+offset_top = 377.0
+offset_right = 1128.0
+offset_bottom = 475.0
+theme = ExtResource("4_jjvhh")
+text = "Charge"
+
+[node name="CenterContainer" type="CenterContainer" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves"]
+offset_left = 481.0
+offset_top = 105.0
+offset_right = 1592.0
+offset_bottom = 205.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="Attacks" type="GridContainer" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 100
+columns = 4
+
+[node name="Boom" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_jjvhh")
+text = "Boom"
+
+[node name="Tornado" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_jjvhh")
+text = "Tornado	"
+
+[node name="Fireball" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_jjvhh")
+text = "Fireball"
+
+[node name="SuperBoom" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_jjvhh")
+text = "SBoom"
+
+[node name="CenterContainer2" type="CenterContainer" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves"]
+offset_left = 495.0
+offset_top = 595.0
+offset_right = 1606.0
+offset_bottom = 695.0
+
+[node name="Defenses" type="GridContainer" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 100
+columns = 4
+
+[node name="Block" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("4_jjvhh")
+text = "Block"
+
+[node name="Tblock" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("4_jjvhh")
+text = "TBlock
+"
+
+[node name="Fblock" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("4_jjvhh")
+text = "FBlock
+"
+
+[node name="Sblock" type="Button" parent="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("4_jjvhh")
+text = "SBlock
+"
+
+[node name="Debug?" type="Node2D" parent="Main Container/MarginContainer/UI/Main Game Screen"]
+visible = false
+
+[node name="Label" type="Label" parent="Main Container/MarginContainer/UI/Main Game Screen/Debug?"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 80.0
+offset_bottom = 147.833
+theme_override_font_sizes/font_size = 40
+
+[node name="Player Info" type="HBoxContainer" parent="Main Container/MarginContainer/UI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Panel" type="Panel" parent="Main Container/MarginContainer/UI/Player Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ig7tw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Container/MarginContainer/UI/Player Info/Panel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 90.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Container/MarginContainer/UI/Player Info/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Health" type="Label" parent="Main Container/MarginContainer/UI/Player Info/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 13.08
+theme_type_variation = &"HeaderLarge"
+text = "Health: ❣️❣️❣️❣️❣️"
+
+[node name="Charges" type="Label" parent="Main Container/MarginContainer/UI/Player Info/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Charges: 0"
+
+[node name="Name" type="Label" parent="Main Container/MarginContainer/UI/Player Info/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLarge"
+text = "Name of Player"
+horizontal_alignment = 2
+
+[connection signal="dead" from="Main Container/MarginContainer/UI/Main Game Screen/Sprites/Player" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_player_dead"]
+[connection signal="dead" from="Main Container/MarginContainer/UI/Main Game Screen/Sprites/Opponent" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_opponent_dead"]
+[connection signal="timeout" from="Main Container/MarginContainer/UI/Main Game Screen/Timers/InputTime" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_input_time_timeout"]
+[connection signal="timeout" from="Main Container/MarginContainer/UI/Main Game Screen/Timers/WaitTime" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_wait_time_timeout"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Start" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_start_pressed"]
+[connection signal="toggled" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Pause" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_pause_toggled"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/Charge" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_charge_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks/Boom" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_boom_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks/Tornado" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_tornado_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks/Fireball" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_fireball_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer/Attacks/SuperBoom" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_super_boom_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses/Block" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_block_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses/Tblock" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_tblock_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses/Fblock" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_fblock_pressed"]
+[connection signal="pressed" from="Main Container/MarginContainer/UI/Main Game Screen/UI/Moves/CenterContainer2/Defenses/Sblock" to="Main Container/MarginContainer/UI/Main Game Screen" method="_on_sblock_pressed"]
